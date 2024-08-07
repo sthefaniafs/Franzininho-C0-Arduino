@@ -1,12 +1,5 @@
-/*
-  Exemplo de Debounce de botão para a Franzininho C0
-  Usa interrupção do time (baseado no exemplo Timerbase_callback)
-  Envia mensagem pela serial quando botão é apertado ou solto
-
-  15/10/23 Daniel Quadros
-*/
-
 #define BOTAO 8
+#define DEBOUNCE_STABLE_PERIOD 10 // 100ms
 
 HardwareTimer *MyTim;
 
@@ -14,16 +7,13 @@ bool apertouBotao = false;
 bool soltouBotao = false;
 bool botaoApertadoDb = false;
 
-#define DEBOUNCE_STABLE_PERIOD 10 // 100ms
-
-// Iniciacao
 void setup() {
   // Conecta a UART aos pinos ligados à USB
   Serial.setRx(PA_10_R);
   Serial.setTx(PA_9_R);
   // Inicia a serial
   Serial.begin(115200);
-  // Dá um tempo para a IDE do Arduino ativar o Monitor Serial
+  // tempo para a IDE do Arduino ativar o Monitor Serial
   delay(3000);
 
   // Inicia o botao
@@ -69,7 +59,6 @@ void Tim_callback(void) {
 
 }
 
-// Laco Principal - avisa quando aperta ou solta o botão
 void loop() {
   if (apertouBotao) {
     apertouBotao = false;

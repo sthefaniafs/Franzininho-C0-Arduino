@@ -1,5 +1,5 @@
 #define POT A0
-#define LED PB6
+#define LED PB7
 
 void setup() {
   // Inicia o pino de controle do LED
